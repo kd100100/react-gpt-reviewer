@@ -8,11 +8,24 @@
 }
 
 @layer utilities {
+  .optionSelected {
+    color: #f2617a;
+    border-color: #f2617a;
+  }
+  .navbar-selected {
+    background-color: #f2617a;
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
 }
 
 * {
-  font-family: "Inter", sans-serif;
   color: white;
+}
+
+textarea {
+  outline-color: rgba(255, 255, 255, 0.5);
+  border-radius: 4px;
 }
 
 body {
