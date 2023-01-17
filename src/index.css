@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bitter-font: "Bitter", serif;
+  --inter-font: "Inter", sans-serif;
+}
+
+@layer utilities {
+}
+
+* {
+  font-family: "Inter", sans-serif;
+  color: white;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  width: 100%;
+  background-color: #003d50;
+}
