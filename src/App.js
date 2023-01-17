@@ -4,7 +4,7 @@ import "./App.css";
 import Highlight from "react-highlight";
 
 const configuration = new Configuration({
-  apiKey: process.env.REACT_APP_SERVICE_URL,
+  apiKey: process.env.REACT_APP_OPENAI_API_KEY,
 });
 
 function App() {
