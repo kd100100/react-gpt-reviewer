@@ -1,24 +1,34 @@
-import { highlight, languages } from "prismjs";
 import React from "react";
-import Editor from "react-simple-code-editor";
+import AceEditor from "react-ace";
 
 function TextBox(props) {
   const { text, onTextChange, title } = props;
 
   return (
     <div className="w-full bg-black-transparent p-5">
-      <h2 className="border-b border-white pb-4 font-inter">{title}</h2>
-      <Editor
+      <h2 className="border-b border-white pb-4 font-inter m">{title}</h2>
+      <AceEditor
+        mode="javascript"
+        theme="terminal"
+        onChange={onTextChange}
         value={text}
-        onValueChange={onTextChange}
-        highlight={(code) => highlight(code, languages.js)}
+        name={title}
+        fontSize={14}
+        showPrintMargin={true}
+        showGutter={true}
+        highlightActiveLine={true}
         style={{
-          fontFamily: '"Fira code", "Fira Mono", monospace',
-          fontSize: 12,
-          height: "62.5vh",
+          height: "65vh",
           overflow: "auto",
           marginTop: "20px",
-          borderRadius: "4px",
+          width: "100%",
+        }}
+        setOptions={{
+          enableBasicAutocompletion: false,
+          enableLiveAutocompletion: false,
+          enableSnippets: false,
+          showLineNumbers: true,
+          tabSize: 2,
         }}
       />
     </div>

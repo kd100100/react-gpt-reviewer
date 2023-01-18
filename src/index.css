@@ -18,6 +18,10 @@
     padding-bottom: 8px;
   }
 }
+.ace-tm,
+.ace_gutter {
+  background-color: transparent !important;
+}
 
 * {
   color: white;

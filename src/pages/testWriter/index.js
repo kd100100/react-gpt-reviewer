@@ -77,7 +77,7 @@ function TestWriter() {
       <div className="flex justify-between items-center pt-1 gap-4">
         <TextBox
           text={inputCode}
-          onTextChange={(code) => setInputCode(code)}
+          onTextChange={(e) => setInputCode(e)}
           title="Code for testing"
         />
         <TextBox
