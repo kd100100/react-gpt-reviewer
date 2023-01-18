@@ -14,9 +14,10 @@ function TextBox(props) {
         value={text}
         name={title}
         fontSize={14}
-        showPrintMargin={true}
+        showPrintMargin={false}
         showGutter={true}
         highlightActiveLine={true}
+        wrapEnabled={true}
         style={{
           height: "65vh",
           overflow: "auto",
@@ -26,7 +27,7 @@ function TextBox(props) {
         setOptions={{
           enableBasicAutocompletion: false,
           enableLiveAutocompletion: false,
-          enableSnippets: false,
+          enableSnippets: true,
           showLineNumbers: true,
           tabSize: 2,
         }}

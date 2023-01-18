@@ -20,9 +20,12 @@ function SecurityThreatsChecker() {
 
   const generate = async () => {
     try {
-      // const prompt = `write functional test code for the following function \n ${inputCode}.`;
-      const prompt = `write unit test code for the following function \n ${inputCode}.`;
-      // const prompt = `Check for application security threats \n ${inputCode}.`;
+      const prompt = `Check for application security threats \n ${inputCode}. \n 
+      Also, explain which line of code has problem and how to fix it 
+      using the following format \n Line number: \n Problem: \n Solution: \n. 
+      In the solution, provide actual code to fix, in the format \n Proable code: \n.
+      Also, mention the name of the security threat and 
+      the severity of the threat.`;
 
       const openai = new OpenAIApi(configuration);
       const completion = await openai.createCompletion({
