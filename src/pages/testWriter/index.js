@@ -17,6 +17,9 @@ function TestWriter() {
   const [testOption, setTestOption] = useState(TestOptions.FunctionalTest);
 
   const removeEmptyLinesAtStart = (text) => {
+    if (text.startsWith(" ")) {
+      return removeEmptyLinesAtStart(text.slice(1));
+    }
     if (text.startsWith("\n")) {
       return removeEmptyLinesAtStart(text.slice(2));
     }
@@ -26,9 +29,17 @@ function TestWriter() {
 
   const generate = async () => {
     try {
-      // const prompt = `write functional test code for the following function \n ${inputCode}.`;
-      const prompt = `write unit test code for the following function \n ${inputCode}.`;
-      // const prompt = `Check for application security threats \n ${inputCode}.`;
+      const functionalTestPrompt = `write functional test scenarios that needs to be tested 
+                    for the following function \n ${inputCode} \n. 
+                    Also, mention which scenario can be tagged as a smoke test. 
+                    Lastly write the full test code for all the scenarios 
+                    in the format \n Scenario: \n Test code: \n.`;
+      const unitTestPrompt = `write unit test code for the following function \n ${inputCode} \n in the format \n Scenario: \n Test code: \n.`;
+      const prompt =
+        testOption === TestOptions.FunctionalTest
+          ? functionalTestPrompt
+          : unitTestPrompt;
+
       const openai = new OpenAIApi(configuration);
       const completion = await openai.createCompletion({
         model: "text-davinci-003",
