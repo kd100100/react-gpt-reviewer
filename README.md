@@ -1,4 +1,8 @@
-![GPT Reviewer](./src/assets/images/logo.png)
+<div align="center">
+  <img src="https://images.ctfassets.net/a0typynlh1op/3UTTL0vbI27NhW7Gg00bSV/f89008cbade4458f1ccafae39ec10baa/logo.png?fl=progressive" alt="GPT Reviewer" style="width: 350px;" />
+</div>
+
+<br/>
 
 ## Requirements ✅
 
