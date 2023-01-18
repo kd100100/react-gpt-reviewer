@@ -4,8 +4,15 @@ import Logo from "../../assets/images/logo.png";
 import MenuIcon from "../../assets/images/menu-icon.svg";
 import XMarkIcon from "../../assets/images/x-mark-icon.svg";
 
-function Navbar() {
+function Navbar(props) {
+  const { currentPage, changePage, navbarItems } = props;
+
   const [showSidebar, setShowSidebar] = useState(false);
+
+  const handlePageChange = (newPage) => {
+    setShowSidebar(false);
+    changePage(newPage);
+  };
 
   return (
     <>
@@ -58,16 +65,22 @@ function Navbar() {
                           </div>
                         </div>
                       </div>
-                      <div className="navbar-selected px-6 transition-all duration-200">
-                        <button className="py-4">
-                          Write unit and functional tests
-                        </button>
-                      </div>
-                      <div className="px-6 transition-all duration-200">
-                        <button className="py-4">
-                          Check for application security threats
-                        </button>
-                      </div>
+                      {navbarItems &&
+                        Object.keys(navbarItems).map((navbarItemKey) => (
+                          <button
+                            className={` px-6 transition-all duration-200 text-left ${
+                              navbarItems[navbarItemKey] === currentPage &&
+                              "navbar-selected"
+                            }`}
+                            onClick={() =>
+                              handlePageChange(navbarItems[navbarItemKey])
+                            }
+                          >
+                            <h2 className="py-4">
+                              {navbarItems[navbarItemKey]}
+                            </h2>
+                          </button>
+                        ))}
                     </div>
                   </Dialog.Panel>
                 </Transition.Child>

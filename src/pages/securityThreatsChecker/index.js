@@ -2,19 +2,13 @@ import { Configuration, OpenAIApi } from "openai";
 import React, { useState } from "react";
 import TextBox from "../../components/textBox";
 
-const TestOptions = {
-  FunctionalTest: "functionalTest",
-  UnitTest: "unitTest",
-};
-
 const configuration = new Configuration({
   apiKey: process.env.REACT_APP_OPENAI_API_KEY,
 });
 
-function TestWriter() {
+function SecurityThreatsChecker() {
   const [inputCode, setInputCode] = useState("");
-  const [outputCode, setOutputCode] = useState("");
-  const [testOption, setTestOption] = useState(TestOptions.FunctionalTest);
+  const [outputThreats, setOutputThreats] = useState("");
 
   const removeEmptyLinesAtStart = (text) => {
     if (text.startsWith("\n")) {
@@ -29,6 +23,7 @@ function TestWriter() {
       // const prompt = `write functional test code for the following function \n ${inputCode}.`;
       const prompt = `write unit test code for the following function \n ${inputCode}.`;
       // const prompt = `Check for application security threats \n ${inputCode}.`;
+
       const openai = new OpenAIApi(configuration);
       const completion = await openai.createCompletion({
         model: "text-davinci-003",
@@ -36,7 +31,7 @@ function TestWriter() {
         max_tokens: 1024,
       });
       const response = removeEmptyLinesAtStart(completion.data.choices[0].text);
-      setOutputCode(response);
+      setOutputThreats(response);
     } catch (error) {
       console.error(error);
     }
@@ -46,25 +41,9 @@ function TestWriter() {
     <div>
       <div className="flex justify-between items-center py-6 font-inter">
         <div className="flex items-center">
-          <h2 className="font-semibold text-lg mr-6">Type of Test:</h2>
-          <button
-            type="button"
-            className={`mr-4 transition-all duration-500 pb-1 -mb-1.5 border-b-2 border-wave-blue ${
-              testOption === TestOptions.FunctionalTest && "optionSelected"
-            }`}
-            onClick={() => setTestOption(TestOptions.FunctionalTest)}
-          >
-            Functional Test
-          </button>
-          <button
-            type="button"
-            className={`mr-4 transition-all duration-500 pb-1 -mb-1.5 border-b-2 border-wave-blue ${
-              testOption === TestOptions.UnitTest && "optionSelected"
-            }`}
-            onClick={() => setTestOption(TestOptions.UnitTest)}
-          >
-            Unit Test
-          </button>
+          <h2 className="font-semibold text-lg mr-6">
+            Application Security Threats Review
+          </h2>
         </div>
         <button
           type="button"
@@ -78,16 +57,16 @@ function TestWriter() {
         <TextBox
           text={inputCode}
           onTextChange={(code) => setInputCode(code)}
-          title="Code for testing"
+          title="Code for checking threats"
         />
         <TextBox
-          text={outputCode}
+          text={outputThreats}
           onTextChange={() => {}}
-          title="Generated Tests"
+          title="Generated Security Threats"
         />
       </div>
     </div>
   );
 }
 
-export default TestWriter;
+export default SecurityThreatsChecker;
