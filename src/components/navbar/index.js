@@ -1,6 +1,7 @@
 import { Dialog, Transition } from "@headlessui/react";
 import React, { Fragment, useState } from "react";
 import Logo from "../../assets/images/logo.png";
+import TWLogo from "../../assets/images/tw-logo.svg";
 import MenuIcon from "../../assets/images/menu-icon.svg";
 import XMarkIcon from "../../assets/images/x-mark-icon.svg";
 
@@ -45,11 +46,18 @@ function Navbar(props) {
                     <div className="flex h-full flex-col overflow-y-scroll bg-wave-blue shadow-xl">
                       <div className="overflow-y-auto py-8 px-4 sm:px-6 pb-12">
                         <div className="flex items-center justify-between">
-                          <img
-                            src={Logo}
-                            className="h-8"
-                            alt="GPT Reviewer Logo"
-                          />
+                          <div className="flex">
+                            <img
+                              src={TWLogo}
+                              className="h-6 border-r-mist-gray border-r-[1px] mr-3 pr-3"
+                              alt="Thoughtworks Logo"
+                            />
+                            <img
+                              src={Logo}
+                              className="h-6"
+                              alt="GPT Reviewer Logo"
+                            />
+                          </div>
                           <div className="ml-3 flex h-7 items-center">
                             <button
                               type="button"
@@ -89,10 +97,17 @@ function Navbar(props) {
           </div>
         </Dialog>
       </Transition.Root>
-      <div className="flex justify-between py-6 font-inter">
-        <img src={Logo} className="h-12" alt="GPT Reviewer Logo" />
+      <div className="flex justify-between py-6 pt-7 font-inter items-center">
+        <div className="flex">
+          <img
+            src={TWLogo}
+            className="h-8 border-r-mist-gray border-r-[1.5px] mr-4 pr-4"
+            alt="Thoughtworks Logo"
+          />
+          <img src={Logo} className="h-8" alt="GPT Reviewer Logo" />
+        </div>
         <button type="button" onClick={() => setShowSidebar(true)}>
-          <img src={MenuIcon} className="h-12" alt="Menu" />
+          <img src={MenuIcon} className="h-10" alt="Menu" />
         </button>
       </div>
     </>
