@@ -9,6 +9,7 @@ const configuration = new Configuration({
 function SecurityThreatsChecker() {
   const [inputCode, setInputCode] = useState("");
   const [outputThreats, setOutputThreats] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const removeEmptyLinesAtStart = (text) => {
     if (text.startsWith("\n")) {
@@ -19,6 +20,7 @@ function SecurityThreatsChecker() {
   };
 
   const generate = async () => {
+    setIsLoading(true);
     try {
       const prompt = `Check for application security threats \n ${inputCode}. \n 
       Also, explain which line of code has problem and how to fix it 
@@ -35,6 +37,7 @@ function SecurityThreatsChecker() {
       });
       const response = removeEmptyLinesAtStart(completion.data.choices[0].text);
       setOutputThreats(response);
+      setIsLoading(false);
     } catch (error) {
       console.error(error);
     }
@@ -42,6 +45,11 @@ function SecurityThreatsChecker() {
 
   return (
     <div>
+      {isLoading && (
+        <div className="absolute top-0 left-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center items-center z-10">
+          <div class="w-24 h-24 border-l-2 border-white border-opacity-75 rounded-full animate-spin"></div>
+        </div>
+      )}
       <div className="flex justify-between items-center py-6 font-inter">
         <div className="flex items-center">
           <h2 className="font-semibold text-lg mr-6">

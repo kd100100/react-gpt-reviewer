@@ -1,10 +1,12 @@
 import { useState } from "react";
 import Navbar from "./components/navbar";
+import CodeWriter from "./pages/codeWriter";
 import SecurityThreatsChecker from "./pages/securityThreatsChecker";
 import TestWriter from "./pages/testWriter";
 
 const NavbarItems = {
   TestWriter: "Write unit and functional tests",
+  CodeWriter: "Write code from tests",
   SecurityThreatsChecker: "Check for application security threats",
 };
 
@@ -19,6 +21,7 @@ function App() {
         navbarItems={NavbarItems}
       />
       {currentPage === NavbarItems.TestWriter && <TestWriter />}
+      {currentPage === NavbarItems.CodeWriter && <CodeWriter />}
       {currentPage === NavbarItems.SecurityThreatsChecker && (
         <SecurityThreatsChecker />
       )}

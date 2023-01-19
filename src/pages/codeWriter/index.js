@@ -9,6 +9,7 @@ const configuration = new Configuration({
 function CodeWriter() {
   const [inputCode, setInputCode] = useState("");
   const [outputCode, setOutputCode] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const removeEmptyLinesAtStart = (text) => {
     if (text.startsWith("\n")) {
@@ -19,6 +20,7 @@ function CodeWriter() {
   };
 
   const generate = async () => {
+    setIsLoading(true);
     try {
       const prompt = `Write code that implements the below unit test codes. Do not write tests, give me only the code that implements the tests \n ${inputCode}.`;
 
@@ -30,6 +32,7 @@ function CodeWriter() {
       });
       const response = removeEmptyLinesAtStart(completion.data.choices[0].text);
       setOutputCode(response);
+      setIsLoading(false);
     } catch (error) {
       console.error(error);
     }
@@ -37,6 +40,11 @@ function CodeWriter() {
 
   return (
     <div>
+      {isLoading && (
+        <div className="absolute top-0 left-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center items-center z-10">
+          <div class="w-24 h-24 border-l-2 border-white border-opacity-75 rounded-full animate-spin"></div>
+        </div>
+      )}
       <div className="flex justify-between items-center py-6 font-inter">
         <div className="flex items-center">
           <h2 className="font-semibold text-lg mr-6">Get code from tests</h2>

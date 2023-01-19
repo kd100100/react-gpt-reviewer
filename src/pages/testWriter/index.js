@@ -15,6 +15,7 @@ function TestWriter() {
   const [inputCode, setInputCode] = useState("");
   const [outputCode, setOutputCode] = useState("");
   const [testOption, setTestOption] = useState(TestOptions.FunctionalTest);
+  const [isLoading, setIsLoading] = useState(false);
 
   const removeEmptyLinesAtStart = (text) => {
     if (text.startsWith(" ")) {
@@ -28,6 +29,7 @@ function TestWriter() {
   };
 
   const generate = async () => {
+    setIsLoading(true);
     try {
       const functionalTestPrompt = `write functional test scenarios that needs to be tested 
                     for the following function \n ${inputCode} \n. 
@@ -48,6 +50,7 @@ function TestWriter() {
       });
       const response = removeEmptyLinesAtStart(completion.data.choices[0].text);
       setOutputCode(response);
+      setIsLoading(false);
     } catch (error) {
       console.error(error);
     }
@@ -55,6 +58,11 @@ function TestWriter() {
 
   return (
     <div>
+      {isLoading && (
+        <div className="absolute top-0 left-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center items-center z-10">
+          <div class="w-24 h-24 border-l-2 border-white border-opacity-75 rounded-full animate-spin"></div>
+        </div>
+      )}
       <div className="flex justify-between items-center py-6 font-inter">
         <div className="flex items-center">
           <h2 className="font-semibold text-lg mr-6">Type of Test:</h2>
