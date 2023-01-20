@@ -10,6 +10,7 @@ function CodeWriter() {
   const [inputCode, setInputCode] = useState("");
   const [outputCode, setOutputCode] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [language, setLanguage] = useState(null);
 
   const removeEmptyLinesAtStart = (text) => {
     if (text.startsWith("\n")) {
@@ -62,11 +63,16 @@ function CodeWriter() {
           text={inputCode}
           onTextChange={(code) => setInputCode(code)}
           title="Tests for writing code"
+          readOnly={false}
+          language={language}
+          onLanguageChange={(language) => setLanguage(language)}
         />
         <TextBox
           text={outputCode}
           onTextChange={() => {}}
           title="Generated Code"
+          readOnly={true}
+          language={language}
         />
       </div>
     </div>

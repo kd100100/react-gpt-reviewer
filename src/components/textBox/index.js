@@ -1,37 +1,36 @@
 import React from "react";
-import AceEditor from "react-ace";
+import detect from "lang-detector";
+import CodeEditor from "@uiw/react-textarea-code-editor";
+import languageMap from "./languageMap";
 
 function TextBox(props) {
-  const { text, onTextChange, title } = props;
+  const { text, onTextChange, title, readOnly, language, onLanguageChange } =
+    props;
+
+  const handleChange = (event) => {
+    onTextChange(event.target.value);
+    if (!readOnly) onLanguageChange(detect(event.target.value));
+  };
 
   return (
     <div className="w-full bg-black-transparent p-5">
-      <h2 className="border-b border-white pb-4 font-inter m">{title}</h2>
-      <AceEditor
-        mode="javascript"
-        theme="terminal"
-        onChange={onTextChange}
-        value={text}
-        name={title}
-        fontSize={14}
-        showPrintMargin={false}
-        showGutter={true}
-        highlightActiveLine={true}
-        wrapEnabled={true}
-        style={{
-          height: "65vh",
-          overflow: "auto",
-          marginTop: "20px",
-          width: "100%",
-        }}
-        setOptions={{
-          enableBasicAutocompletion: false,
-          enableLiveAutocompletion: false,
-          enableSnippets: true,
-          showLineNumbers: true,
-          tabSize: 2,
-        }}
-      />
+      <h2 className="border-b border-white pb-4 font-inter mb-4">{title}</h2>
+      <div className="overflow-auto h-[65vh] w-full">
+        <CodeEditor
+          readOnly={readOnly}
+          value={text}
+          language={languageMap[language]}
+          placeholder=""
+          onChange={handleChange}
+          style={{
+            minHeight: "65vh",
+            fontSize: 14,
+            backgroundColor: "transparent",
+            fontFamily:
+              "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
+          }}
+        />
+      </div>
     </div>
   );
 }

@@ -10,6 +10,7 @@ function SecurityThreatsChecker() {
   const [inputCode, setInputCode] = useState("");
   const [outputThreats, setOutputThreats] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [language, setLanguage] = useState(null);
 
   const removeEmptyLinesAtStart = (text) => {
     if (text.startsWith("\n")) {
@@ -69,11 +70,15 @@ function SecurityThreatsChecker() {
           text={inputCode}
           onTextChange={(code) => setInputCode(code)}
           title="Code for checking threats"
+          readOnly={false}
+          language={language}
+          onLanguageChange={(language) => setLanguage(language)}
         />
         <TextBox
           text={outputThreats}
           onTextChange={() => {}}
           title="Generated Security Threats"
+          readOnly={true}
         />
       </div>
     </div>

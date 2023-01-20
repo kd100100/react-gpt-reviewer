@@ -16,6 +16,7 @@ function TestWriter() {
   const [outputCode, setOutputCode] = useState("");
   const [testOption, setTestOption] = useState(TestOptions.FunctionalTest);
   const [isLoading, setIsLoading] = useState(false);
+  const [language, setLanguage] = useState(null);
 
   const removeEmptyLinesAtStart = (text) => {
     if (text.startsWith(" ")) {
@@ -98,11 +99,16 @@ function TestWriter() {
           text={inputCode}
           onTextChange={(e) => setInputCode(e)}
           title="Code for testing"
+          readOnly={false}
+          language={language}
+          onLanguageChange={(language) => setLanguage(language)}
         />
         <TextBox
           text={outputCode}
           onTextChange={() => {}}
           title="Generated Tests"
+          readOnly={true}
+          language={language}
         />
       </div>
     </div>
